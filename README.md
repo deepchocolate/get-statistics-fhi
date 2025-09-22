@@ -18,10 +18,10 @@ In this simple example the number of users for ATC codes starting
 with "A01AA" are retrieved from the drug register.
 ```R
 library(getStatisticsFHI)
-dta <- getDataLMR('615')
-dta <- filterAge(dta, filter='item', value='TOTALT')
-dta <- filterATC(dta, filter='all', value='A01AA*')
-tmp <- get(dta,0)
+req <- dataRequestLMR('615')
+req <- filterAge(req, filter='item', value='TOTALT')
+req <- filterATC(req, filter='all', value='A01AA*')
+dta <- getData(dta)
 ```
 
 The number 615 in `getDataLMR('615') is highly mysterious. To find the right table
