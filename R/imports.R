@@ -1,0 +1,2 @@
+#' @importFrom stringi %s+%
+NULL

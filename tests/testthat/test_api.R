@@ -1,0 +1,11 @@
+test_that('Test API', {
+  req <- dataRequestLMR('615')
+  expect_s4_class(req, 'dataRequest')
+  expect_vector(filters(req))
+  req <- filterAge(req, filter='item', value='TOTALT')
+  expect_s4_class(req, 'dataRequest')
+  req <- filterAge(req, filter='item', value=5)
+  expect_s4_class(req, 'dataRequest')
+  req <- filterATC(req, filter='all', value='A01AA*')
+  expect_s4_class(req, 'dataRequest')
+})
