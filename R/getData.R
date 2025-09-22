@@ -26,6 +26,7 @@ setMethod('initialize', signature('dataRequest'),
 
 #' Execute a request to get data.
 #'
+#' @export
 #' @name getData
 #' @docType methods
 #' @param x A dataRequest object.
@@ -52,13 +53,14 @@ setMethod('getData', signature(x='dataRequest'),
 
 #' Get filters that are applied to a request.
 #'
+#' @export
 #' @name filters
 #' @docType methods
 #' @param object A dataRequest object.
 #' @examples
 #' \dontrun{
 #' library(getStatisticsFHI)
-#' req <- getDataLMR('615')
+#' req <- dataRequestLMR('615')
 #' req <- filterAge(req, filter='item', value='TOTALT')
 #' filters(req)
 #' }
@@ -78,6 +80,7 @@ setMethod('filters', signature('dataRequest'),
 
 #' Prepare a request to retrieve data from the drug register
 #'
+#' @export
 #' @name dataRequestLMR
 #' @docType methods
 #' @param idTable A table ID.
@@ -104,6 +107,7 @@ getAgeGroup <- function (age) {
 
 #' Filter data on age group.
 #'
+#' @export
 #' @name filterAge
 #' @docType methods
 #' @param object A dataRequest object.
@@ -132,6 +136,7 @@ setMethod('filterAge', signature('dataRequest', 'character', 'numeric'),
 
 #' Filter data on ATC code.
 #'
+#' @export
 #' @name filterATC
 #' @docType methods
 #' @param object A dataRequest object.

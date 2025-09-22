@@ -19,7 +19,7 @@ Get filters that are applied to a request.
 \examples{
 \dontrun{
 library(getStatisticsFHI)
-req <- getDataLMR('615')
+req <- dataRequestLMR('615')
 req <- filterAge(req, filter='item', value='TOTALT')
 filters(req)
 }
