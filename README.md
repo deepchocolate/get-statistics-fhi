@@ -15,7 +15,8 @@ install.package('path/getStatisticsFHI_x.y.x.tar.gz', repos=NULL)
 
 ## Usage
 In this simple example the number of users for ATC codes starting
-with "A01AA" are retrieved from the drug register.
+with "A01AA" are retrieved from the drug register. Filters are applied to remove
+specific age groups, and ATC codes are restricted to those starting with "A01AA*".
 ```R
 library(getStatisticsFHI)
 req <- dataRequestLMR('615')
@@ -24,9 +25,11 @@ req <- filterATC(req, filter='all', value='A01AA*')
 dta <- getData(dta)
 ```
 
-The number 615 in `getDataLMR('615') is highly mysterious. To find the right table
+The number 615 (table ID) in `getDataLMR('615')` is highly mysterious. To find the right table
 ID one can use `getSourceDesc('lmr')` to find a potential table, and use its id
-with `getTableMeta(#ID)` to get details.
+with `getTableMeta(#ID)` to get details. The `filter` argument to the `filter...` functions
+can be any of `"item"`, `"all"` or `"top"`. The link below provides a more detailed
+explanation of how to use these.
 
 Further information is available in the github repository for the API:
 https://github.com/folkehelseinstituttet/Fhi.Statistikk.OpenAPI?tab=readme-ov-file
