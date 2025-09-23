@@ -2,7 +2,7 @@ Package: getStatisticsFHI
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person("Andreas", "Jangmo", , "andreasjangmo@gmail.com", role = c("aut", "cre"))
+    person("Andreas", "Jangmo", , "andreasjangmo@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-6928-4791"))
 Description: What the package does (one paragraph).
 License: Apache License (>= 2)
 Encoding: UTF-8
