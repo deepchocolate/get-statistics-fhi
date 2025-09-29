@@ -50,7 +50,7 @@ setMethod('initialize', signature('dataRequestLMR'),
 #' @examples
 #' \dontrun{
 #' library(getStatisticsFHI)
-#' req <- dataRequestLMR('615')
+#' req <- dataRequest('lmr', '615')
 #' req <- filterAge(req, filter='item', value='TOTALT')
 #' getData(req)
 #' }
@@ -77,7 +77,7 @@ setMethod('getData', signature('dataRequestAbstract'),
 #' @examples
 #' \dontrun{
 #' library(getStatisticsFHI)
-#' req <- dataRequestLMR('615')
+#' req <- dataRequest('lmr', '615')
 #' req <- filterAge(req, filter='item', value='TOTALT')
 #' filters(req)
 #' }
@@ -137,7 +137,7 @@ getAgeGroup <- function (age) {
 #' @examples
 #' \dontrun{
 #' library(getStatisticsFHI)
-#' req <- dataRequestLMR('615')
+#' req <- dataRequest('lmr', '615')
 #' req <- filterAge(req, filter='item', value='TOTALT')
 #' getData(req)
 #' }
@@ -167,7 +167,7 @@ setMethod('filterAge', signature('dataRequestLMR', 'character', 'numeric'),
 #' @examples
 #' \dontrun{
 #' library(getStatisticsFHI)
-#' req <- dataRequestLMR('615')
+#' req <- dataRequest('lmr', '615')
 #' req <- filterATC(req, filter='all', value='AA*')
 #' getData(req)
 #' }
