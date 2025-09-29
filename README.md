@@ -22,7 +22,7 @@ library(getStatisticsFHI)
 req <- dataRequestLMR('615')
 req <- filterAge(req, filter='item', value='TOTALT')
 req <- filterATC(req, filter='all', value='A01AA*')
-dta <- getData(dta)
+dta <- getData(req)
 ```
 
 The number 615 (table ID) in `getDataLMR('615')` is highly mysterious. To find the right table
