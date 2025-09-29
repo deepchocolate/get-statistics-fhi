@@ -36,7 +36,7 @@ setMethod('initialize', signature('dataRequest'),
 #' library(getStatisticsFHI)
 #' req <- dataRequestLMR('615')
 #' req <- filterAge(req, filter='item', value='TOTALT')
-#' getData(reg)
+#' getData(req)
 #' }
 #' @return A dataframe.
 setGeneric('getData', function (x, ...) standardGeneric('getData'))
@@ -89,7 +89,7 @@ setMethod('filters', signature('dataRequest'),
 #' library(getStatisticsFHI)
 #' req <- dataRequestLMR('615')
 #' req <- filterAge(req, filter='item', value='TOTALT')
-#' getData(reg)
+#' getData(req)
 #' }
 #' @return A dataframe.
 setGeneric('dataRequestLMR', function (idTable) standardGeneric('dataRequestLMR'))
@@ -118,7 +118,7 @@ getAgeGroup <- function (age) {
 #' library(getStatisticsFHI)
 #' req <- dataRequestLMR('615')
 #' req <- filterAge(req, filter='item', value='TOTALT')
-#' getData(reg)
+#' getData(req)
 #' }
 #' @return A dataRequest object with a filter applied.
 setGeneric('filterAge', function (object, filter, value) standardGeneric('filterAge'))
@@ -147,7 +147,7 @@ setMethod('filterAge', signature('dataRequest', 'character', 'numeric'),
 #' library(getStatisticsFHI)
 #' req <- dataRequestLMR('615')
 #' req <- filterATC(req, filter='all', value='AA*')
-#' getData(reg)
+#' getData(req)
 #' }
 #' @return A dataRequest object with a filter applied.
 setGeneric('filterATC', function (object, filter, values) standardGeneric('filterATC'))

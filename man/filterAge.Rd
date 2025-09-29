@@ -25,6 +25,6 @@ Filter data on age group.
 library(getStatisticsFHI)
 req <- dataRequestLMR('615')
 req <- filterAge(req, filter='item', value='TOTALT')
-getData(reg)
+getData(req)
 }
 }

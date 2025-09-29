@@ -25,6 +25,6 @@ Filter data on ATC code.
 library(getStatisticsFHI)
 req <- dataRequestLMR('615')
 req <- filterATC(req, filter='all', value='AA*')
-getData(reg)
+getData(req)
 }
 }

@@ -23,6 +23,6 @@ Execute a request to get data.
 library(getStatisticsFHI)
 req <- dataRequestLMR('615')
 req <- filterAge(req, filter='item', value='TOTALT')
-getData(reg)
+getData(req)
 }
 }
