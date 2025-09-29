@@ -1,19 +1,36 @@
 #' @importFrom jsonlite toJSON unbox
 #' @importFrom utils read.csv
-#' @importFrom methods new
+#' @importFrom methods new callNextMethod
 #' @import httr2
 NULL
-setClass('dataRequest', representation(
+
+#' An S4 class representing a data request
+#'
+#' Holds information regarding each request.
+#'
+#' @name dataRequestAbstract-class
+#' @slot source The data source.
+#' @slot table The table to retrieve data from.
+#' @slot endpoint The URL from which to retrieve data.
+#' @slot filters A list of filters to apply.
+setClass('dataRequestAbstract', representation(
   source = 'character',
   table = 'character',
   endpoint = 'character',
   filters = 'list'
 ))
-setMethod('initialize', signature('dataRequest'),
+setMethod('initialize', signature('dataRequestAbstract'),
           function (.Object, source, idTable, type='') {
             .Object@source = source
             .Object@table = idTable
             .Object@endpoint = endpointTable(source, idTable, type)
+            .Object@filters = list()
+            .Object
+          })
+setClass('dataRequestLMR', contains='dataRequestAbstract')
+setMethod('initialize', signature('dataRequestLMR'),
+          function (.Object, source, idTable, type='') {
+            .Object <- callNextMethod(.Object, source, idTable, type)
             .Object@filters = list(
               age=list(code=unbox('Aldersgruppe_Verdi'),filter=unbox('all'), values='*'),
               measure=list(code=unbox('MEASURE_TYPE'),filter=unbox('item'), values='AntallBrukere'),
@@ -26,7 +43,6 @@ setMethod('initialize', signature('dataRequest'),
 
 #' Execute a request to get data.
 #'
-#' @export
 #' @name getData
 #' @docType methods
 #' @param x A dataRequest object.
@@ -39,9 +55,11 @@ setMethod('initialize', signature('dataRequest'),
 #' getData(req)
 #' }
 #' @return A dataframe.
+#' @export
 setGeneric('getData', function (x, ...) standardGeneric('getData'))
+#' @rdname getData
 #' @param verb Verbosity of execution.
-setMethod('getData', signature(x='dataRequest'),
+setMethod('getData', signature('dataRequestAbstract'),
           function (x, verb=0) {
             js <- jsonlite::toJSON(filters(x))
             req <- request(x@endpoint)
@@ -53,7 +71,6 @@ setMethod('getData', signature(x='dataRequest'),
 
 #' Get filters that are applied to a request.
 #'
-#' @export
 #' @name filters
 #' @docType methods
 #' @param object A dataRequest object.
@@ -65,8 +82,10 @@ setMethod('getData', signature(x='dataRequest'),
 #' filters(req)
 #' }
 #' @return A list outlining the filters.
+#' @export
 setGeneric('filters', function (object) standardGeneric('filters'))
-setMethod('filters', signature('dataRequest'),
+#' @rdname filters
+setMethod('filters', signature('dataRequestAbstract'),
           function (object) {
             list(dimensions=list(
               object@filters$variable,
@@ -80,22 +99,25 @@ setMethod('filters', signature('dataRequest'),
 
 #' Prepare a request to retrieve data from the drug register
 #'
-#' @export
-#' @name dataRequestLMR
+#' @name dataRequest
 #' @docType methods
+#' @param source Data source, e.g. "LMR".
 #' @param idTable A table ID.
 #' @examples
 #' \dontrun{
 #' library(getStatisticsFHI)
-#' req <- dataRequestLMR('615')
+#' req <- dataRequest('lmr', '615')
 #' req <- filterAge(req, filter='item', value='TOTALT')
 #' getData(req)
 #' }
 #' @return A dataframe.
-setGeneric('dataRequestLMR', function (idTable) standardGeneric('dataRequestLMR'))
-setMethod('dataRequestLMR', signature('character'),
-          function (idTable) {
-            new('dataRequest', 'lmr', idTable, 'data')
+#' @export
+setGeneric('dataRequest', function (source, idTable) standardGeneric('dataRequest'))
+#' @rdname dataRequest
+setMethod('dataRequest', signature('character', 'character'),
+          function (source, idTable) {
+            cl <- 'dataRequest' %s+% toupper(source)
+            new(cl, source, idTable, 'data')
           })
 
 #' Function to simplify getting an age group by specifying an age you wish to look at.
@@ -107,7 +129,6 @@ getAgeGroup <- function (age) {
 
 #' Filter data on age group.
 #'
-#' @export
 #' @name filterAge
 #' @docType methods
 #' @param object A dataRequest object.
@@ -121,14 +142,16 @@ getAgeGroup <- function (age) {
 #' getData(req)
 #' }
 #' @return A dataRequest object with a filter applied.
+#' @export
 setGeneric('filterAge', function (object, filter, value) standardGeneric('filterAge'))
-setMethod('filterAge', signature('dataRequest', 'character', 'character'),
+#' @rdname filterAge
+setMethod('filterAge', signature('dataRequestLMR', 'character', 'character'),
           function (object, filter, value='TOTALT') {
             object@filters$age <- list(code=unbox('Aldersgruppe_Verdi'), filter=unbox(filter), values=value)
             object
           })
-
-setMethod('filterAge', signature('dataRequest', 'character', 'numeric'),
+#' @rdname filterAge
+setMethod('filterAge', signature('dataRequestLMR', 'character', 'numeric'),
           function (object, filter, value) {
             value <- getAgeGroup(value)
             filterAge(object, filter, as.character(value))
@@ -136,7 +159,6 @@ setMethod('filterAge', signature('dataRequest', 'character', 'numeric'),
 
 #' Filter data on ATC code.
 #'
-#' @export
 #' @name filterATC
 #' @docType methods
 #' @param object A dataRequest object.
@@ -150,8 +172,10 @@ setMethod('filterAge', signature('dataRequest', 'character', 'numeric'),
 #' getData(req)
 #' }
 #' @return A dataRequest object with a filter applied.
+#' @export
 setGeneric('filterATC', function (object, filter, values) standardGeneric('filterATC'))
-setMethod('filterATC', signature('dataRequest', 'character', 'character'),
+#' @rdname filterATC
+setMethod('filterATC', signature('dataRequestLMR', 'character', 'character'),
           function (object, filter, values) {
             object@filters$variable=list(code=unbox('Atc_Verdi'),filter=unbox(filter), values=values)
             object

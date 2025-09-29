@@ -3,9 +3,12 @@
 \docType{methods}
 \name{filterATC}
 \alias{filterATC}
+\alias{filterATC,dataRequestLMR,character,character-method}
 \title{Filter data on ATC code.}
 \usage{
 filterATC(object, filter, values)
+
+\S4method{filterATC}{dataRequestLMR,character,character}(object, filter, values)
 }
 \arguments{
 \item{object}{A dataRequest object.}

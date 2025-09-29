@@ -3,9 +3,12 @@
 \docType{methods}
 \name{filters}
 \alias{filters}
+\alias{filters,dataRequestAbstract-method}
 \title{Get filters that are applied to a request.}
 \usage{
 filters(object)
+
+\S4method{filters}{dataRequestAbstract}(object)
 }
 \arguments{
 \item{object}{A dataRequest object.}

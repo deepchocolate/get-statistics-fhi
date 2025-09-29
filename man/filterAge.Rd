@@ -3,9 +3,15 @@
 \docType{methods}
 \name{filterAge}
 \alias{filterAge}
+\alias{filterAge,dataRequestLMR,character,character-method}
+\alias{filterAge,dataRequestLMR,character,numeric-method}
 \title{Filter data on age group.}
 \usage{
 filterAge(object, filter, value)
+
+\S4method{filterAge}{dataRequestLMR,character,character}(object, filter, value = "TOTALT")
+
+\S4method{filterAge}{dataRequestLMR,character,numeric}(object, filter, value)
 }
 \arguments{
 \item{object}{A dataRequest object.}

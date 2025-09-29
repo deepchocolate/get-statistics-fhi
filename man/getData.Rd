@@ -3,14 +3,19 @@
 \docType{methods}
 \name{getData}
 \alias{getData}
+\alias{getData,dataRequestAbstract-method}
 \title{Execute a request to get data.}
 \usage{
 getData(x, ...)
+
+\S4method{getData}{dataRequestAbstract}(x, verb = 0)
 }
 \arguments{
 \item{x}{A dataRequest object.}
 
 \item{...}{Verbosity of execution.}
+
+\item{verb}{Verbosity of execution.}
 }
 \value{
 A dataframe.
