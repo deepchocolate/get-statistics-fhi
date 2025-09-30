@@ -1,3 +1,7 @@
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/deepchocolate/get-statistics-fhi/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/deepchocolate/get-statistics-fhi/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+  
 An R-package to interact with the API for statistics maintained by the Norwegian Institute for Public Health
 
 Currently, only the drug register is supported.
