@@ -24,6 +24,10 @@ req <- filterAge(req, filter='item', value='TOTALT')
 req <- filterATC(req, filter='all', value='A01AA*')
 dta <- getData(req)
 ```
+Alternatively, an English, recoded version of data can be fetched with:
+```R
+dta <- getData(req, recode=TRUE)
+```
 
 The number 615 (table ID) in `getDataLMR('615')` is highly mysterious. To find the right table
 ID one can use `getSourceDesc('lmr')` to find a potential table, and use its id
