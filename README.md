@@ -23,7 +23,7 @@ with "A01AA" are retrieved from the drug register. Filters are applied to remove
 specific age groups, and ATC codes are restricted to those starting with "A01AA*".
 ```R
 library(getStatisticsFHI)
-req <- dataRequestLMR('lmr', '615')
+req <- dataRequest('lmr', '615')
 req <- filterAge(req, filter='item', value='TOTALT')
 req <- filterATC(req, filter='all', value='A01AA*')
 dta <- getData(req)
