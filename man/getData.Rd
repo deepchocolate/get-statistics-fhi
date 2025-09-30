@@ -3,17 +3,17 @@
 \docType{methods}
 \name{getData}
 \alias{getData}
-\alias{getData,dataRequestAbstract-method}
+\alias{getData,dataRequestLMR,logical,numeric-method}
 \title{Execute a request to get data.}
 \usage{
-getData(x, ...)
+getData(x, recode, verb)
 
-\S4method{getData}{dataRequestAbstract}(x, verb = 0)
+\S4method{getData}{dataRequestLMR,logical,numeric}(x, recode = F, verb = 0)
 }
 \arguments{
 \item{x}{A dataRequest object.}
 
-\item{...}{Verbosity of execution.}
+\item{recode}{Whether to transform raw data.}
 
 \item{verb}{Verbosity of execution.}
 }
@@ -26,7 +26,7 @@ Execute a request to get data.
 \examples{
 \dontrun{
 library(getStatisticsFHI)
-req <- dataRequestLMR('615')
+req <- dataRequest('lmr', '615')
 req <- filterAge(req, filter='item', value='TOTALT')
 getData(req)
 }

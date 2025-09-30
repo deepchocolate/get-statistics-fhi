@@ -77,4 +77,3 @@ getTableMeta <- function(source, idTable, dataFrame=T) {
 getTableDesc <- function (source, idTable, dataFrame=T) {
   getRequest(endpointTableDesc(source, idTable), dataFrame)
 }
-

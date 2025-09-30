@@ -29,7 +29,7 @@ Filter data on age group.
 \examples{
 \dontrun{
 library(getStatisticsFHI)
-req <- dataRequestLMR('615')
+req <- dataRequest('lmr', '615')
 req <- filterAge(req, filter='item', value='TOTALT')
 getData(req)
 }

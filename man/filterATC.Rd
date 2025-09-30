@@ -26,7 +26,7 @@ Filter data on ATC code.
 \examples{
 \dontrun{
 library(getStatisticsFHI)
-req <- dataRequestLMR('615')
+req <- dataRequest('lmr', '615')
 req <- filterATC(req, filter='all', value='AA*')
 getData(req)
 }

@@ -1,7 +1,7 @@
 #' @importFrom jsonlite toJSON unbox
 #' @importFrom utils read.csv
 #' @importFrom methods new callNextMethod
-#' @import httr2
+#' @import httr2 stringi
 NULL
 
 #' An S4 class representing a data request
@@ -46,7 +46,8 @@ setMethod('initialize', signature('dataRequestLMR'),
 #' @name getData
 #' @docType methods
 #' @param x A dataRequest object.
-#' @param ... Verbosity of execution.
+#' @param recode Whether to transform raw data.
+#' @param verb Verbosity of execution.
 #' @examples
 #' \dontrun{
 #' library(getStatisticsFHI)
@@ -56,17 +57,20 @@ setMethod('initialize', signature('dataRequestLMR'),
 #' }
 #' @return A dataframe.
 #' @export
-setGeneric('getData', function (x, ...) standardGeneric('getData'))
+setGeneric('getData', function (x, recode, verb) standardGeneric('getData'))
 #' @rdname getData
-#' @param verb Verbosity of execution.
-setMethod('getData', signature('dataRequestAbstract'),
-          function (x, verb=0) {
+setMethod('getData', signature('dataRequestLMR', 'logical', 'numeric'),
+          function (x, recode=F, verb=0) {
             js <- jsonlite::toJSON(filters(x))
             req <- request(x@endpoint)
             req <- req |> req_body_raw(js,type = 'application/json')
             resp <- req_perform(req, verbosity=verb)
             o <- resp |> resp_body_string()
-            read.csv(text=o, sep=';')
+            o <- read.csv(text=o, sep=';')
+            if (recode) {
+              o <- recodeLMR(o)
+            }
+            o
           })
 
 #' Get filters that are applied to a request.
