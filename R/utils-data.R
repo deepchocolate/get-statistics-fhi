@@ -1,4 +1,6 @@
-# Function to recode drug register data into a better format.
+#' Function to recode drug register data into a better format.
+#' @param df A dataframe from a call to dataRequest('lmr', '615')
+#' @export
 recodeLMR <- function (df) {
   colnames(df) <- c('desc', 'sex', 'age', 'year', 'individuals', 'flag')
   # Separate description and ATC code

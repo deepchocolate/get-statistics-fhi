@@ -1,6 +1,6 @@
 Package: getStatisticsFHI
-Title: What the Package Does (One Line, Title Case)
-Version: 1.0.0
+Title: Download Statistics From the Norwegian Institute of Public Health
+Version: 1.0.1
 Authors@R: 
     person("Andreas", "Jangmo", , "andreasjangmo@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-6928-4791"))
 Description: What the package does (one paragraph).
